@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron" style="background-color: pink;">
+            <h1>Welcome! Sign in to make a wish!</h1>
+        </div>
+        <div class="row mt-5">
+            <div class="col justify-content-start">
+                <h1 class="mb-5 text-center display-4"><strong>Registration</strong></h1>
+            </div>
+            <div class="col"></div>
+            <div class="col text-center">
+                <h1 class="mb-5 text-center display-4"><strong>Login</strong></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col justify-content-center">
+                <form action="/register" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        {% if messages %}
+                        <ul class="messages mb-4 error-box none">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title" for="first_name">First Name</label>
+                        <input type="text" class="form-control ml-3" id="first_name" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title mt-2" for="last_name">Last Name</label>
+                        <input type="text" class="form-control ml-3" id="last_name" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title mt-2" for="email">Email</label>
+                        <input type="email" class="form-control ml-3" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title mt-2" for="password">Password</label>
+                        <input type="password" class="form-control ml-3" id="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title mt-2" for="conf_password">Confirm Password</label>
+                        <input type="password" class="form-control ml-3" id="conf_password" name="conf_password">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="text-center btn btn-primary mt-2 pl-4 pr-4">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col"></div>
+            <!-- Login sub-titles and input fields -->
+            <div class="col">
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    {% if messages %}
+                    <ul class="messages mb-4 error-box">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="form-group">
+                        <label class="custom-title" for="email">Email</label>
+                        <input type="email" class="form-control ml-3" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="custom-title mt-2" for="password">Password</label>
+                        <input type="password" class="form-control ml-3" id="password" name="password">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="text-center btn btn-primary mt-2 pl-4 pr-4">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

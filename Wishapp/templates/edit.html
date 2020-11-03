@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <h2 class='new_user'>Hello {{ user.first_name }}! Let's edit your wish!</h2>
+    <form class='big_form' action="/update/{{wish.id}}" method='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <label for="exampleFormControlInput1">I wish for:</label>
+            <input type="text" class="form-control" value='{{ wish.item }}' id="exampleFormControlInput1" name='item'>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Description:</label>
+            <input type="text" class="form-control" value="{{ wish.desc }}" id="exampleFormControlInput1" name='desc'>
+        </div>
+        <button type="submit" value='submit' class="btn btn-success">Edit</button>
+        <a class='go_back' href="/wishes">Cancel</a>
+    </form>
+</body>
+</html>
